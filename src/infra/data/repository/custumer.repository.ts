@@ -1,11 +1,15 @@
+import { IClientResponse } from '@application/dto/client.response';
 import { CustumersRepositoryImplements } from '@data/implements/custumers-repository.implements';
 import { Client, IClient } from '@domain/entitys/client.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CustumerRepository implements CustumersRepositoryImplements {
+  findAllClients(): Promise<IClientResponse[]> {
+    throw new Error('Method not implemented.');
+  }
   private custumers: IClient[] = [];
-  async save(client: IClient): Promise<IClient[]> {
+  async save(client: IClient): Promise<IClient | any> {
     this.custumers.push(client);
 
     return this.custumers;

@@ -5,29 +5,30 @@ export interface IClient {
 }
 
 export class Client {
-  private props: IClient;
   constructor(client: IClient) {
-    this.props = client;
+    this.id = client.id;
+    this.document = client.document;
+    this.name = client.name;
   }
 
   public set id(id: string) {
-    this.props.id = id;
+    this.id = id;
   }
   public get id() {
-    return this.props.id;
+    return this.id;
   }
 
   public set document(document: number) {
-    this.props.document = document;
+    this.document = document;
   }
   public get document() {
-    return this.props.document;
+    return this.document;
   }
 
   public set name(name: string) {
-    this.props.name = name;
+    this.name = name;
   }
   public get name() {
-    return this.props.name;
+    return this.name;
   }
 }

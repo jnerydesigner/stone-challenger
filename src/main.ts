@@ -8,7 +8,6 @@ async function bootstrap() {
     .setTitle('Stone Challenger')
     .setDescription('API do Desafio da Stone')
     .setVersion('1.0')
-    .addTag('mkt')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/swagger', app, document);

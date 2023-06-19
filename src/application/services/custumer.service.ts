@@ -1,7 +1,7 @@
+import { StoneErrorException } from '@application/exception/stone-error.exception';
 import { CustumersRepositoryImplements } from '@data/implements/custumers-repository.implements';
-import { CustumerMapper } from '@data/mappers/custumer.mapper';
 import { Client, IClient } from '@domain/entitys/client.entity';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
@@ -10,28 +10,40 @@ export class CustumerService {
     private readonly custumerRepository: CustumersRepositoryImplements,
   ) {}
 
-  saveCustumer(client: IClient): Promise<IClient[] | null> {
+  saveCustumer(client: IClient): Promise<IClient | null> {
     const clientBody = {
       id: uuid(),
       ...client,
     };
 
-    // const clientMapper = CustumerMapper.toDomain({
-    //   id: clientBody.id,
-    //   document: clientBody.document,
-    //   name: clientBody.name,
-    // });
-
     return this.custumerRepository.save(clientBody);
-
-    // return null;
   }
 
-  findClient(idClient: string) {
+  async findClient(idClient: string) {
+    const custumer = await this.custumerRepository.findClient(idClient);
+    console.log(custumer);
+    if (custumer === null) {
+      throw new StoneErrorException(
+        'cliente inexistente',
+        HttpStatus.NOT_FOUND,
+      );
+    }
     return this.custumerRepository.findClient(idClient);
   }
 
-  updateCustumer(idClient: string, client: Client) {
+  async updateCustumer(idClient: string, client: Client) {
+    const custumer = await this.custumerRepository.findClient(idClient);
+    console.log(custumer);
+    if (custumer === null) {
+      throw new StoneErrorException(
+        'cliente inexistente',
+        HttpStatus.NOT_FOUND,
+      );
+    }
     return this.custumerRepository.update(idClient, client);
+  }
+
+  findAll() {
+    return this.custumerRepository.findAllClients();
   }
 }

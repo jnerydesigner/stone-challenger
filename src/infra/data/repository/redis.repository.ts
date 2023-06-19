@@ -1,3 +1,4 @@
+import { IClientResponse } from '@application/dto/client.response';
 import { Injectable, Logger } from '@nestjs/common';
 import { Redis } from 'ioredis';
 
@@ -7,7 +8,7 @@ export class RedisRepository {
   private readonly logger: Logger;
   constructor() {
     this.redis = new Redis({
-      host: '172.18.0.1',
+      host: 'redis',
       port: 6379,
     });
     this.logger = new Logger(RedisRepository.name);
@@ -23,8 +24,7 @@ export class RedisRepository {
 
   async getValueUsingKey(key: string): Promise<string | null> {
     try {
-      const value = await this.redis.get(key);
-      return value;
+      return await this.redis.get(key);
     } catch (error) {
       this.logger.error(error);
       return null;
@@ -38,6 +38,25 @@ export class RedisRepository {
     } catch (error) {
       this.logger.error('Error when updating data :', error);
       return false;
+    }
+  }
+
+  async findAllClients(): Promise<IClientResponse[]> {
+    try {
+      const keys = await this.redis.keys('*');
+      const data: any[] = [];
+
+      for (const key of keys) {
+        const value = await this.redis.get(key);
+        data.push({
+          key,
+          client: JSON.parse(value),
+        });
+      }
+      return data;
+    } catch (error) {
+      this.logger.error('Error displaying customer data:', error);
+      return null;
     }
   }
 

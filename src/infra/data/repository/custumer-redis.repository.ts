@@ -1,3 +1,4 @@
+import { IClientResponse } from '@application/dto/client.response';
 import { CustumersRepositoryImplements } from '@data/implements/custumers-repository.implements';
 import { IClient, Client } from '@domain/entitys/client.entity';
 import { Injectable, Logger } from '@nestjs/common';
@@ -9,6 +10,9 @@ export class CustumerRedisRepository implements CustumersRepositoryImplements {
   constructor(private readonly redisRepository: RedisRepository) {
     this.logger = new Logger(CustumerRedisRepository.name);
   }
+  async findAllClients(): Promise<IClientResponse[]> {
+    return await this.redisRepository.findAllClients();
+  }
   async save(client: IClient): Promise<IClient | null | any> {
     const key = `custumer:${client.id}`;
     this.logger.log(key);
@@ -19,7 +23,6 @@ export class CustumerRedisRepository implements CustumersRepositoryImplements {
     const key = `custumer:${idClient}`;
     this.logger.log(key);
     this.redisRepository.updateValueUsingKey(key, JSON.stringify(client));
-
     return this.redisRepository.getValueUsingKey(key);
   }
   async findClient(idClient: string): Promise<IClient | any> {

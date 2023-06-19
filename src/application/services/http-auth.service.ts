@@ -1,9 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import axios, { AxiosResponse } from 'axios';
 import qs from 'qs';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { AuthDtoResponse } from '@application/dto/auth.dto';
+import { IAuthBody } from '@application/dto/auth-body.request';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class HttpAuthService {
@@ -11,19 +12,19 @@ export class HttpAuthService {
   constructor(private readonly httpService: HttpService) {
     this.logger = new Logger(HttpAuthService.name);
   }
-  async httpAuth(): Promise<AuthDtoResponse> {
+  async httpAuth(body: IAuthBody): Promise<AuthDtoResponse> {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
-    const base64Credentials = Buffer.from(
-      `${process.env.EMAIL_PERSONAL}`,
-    ).toString('base64');
+    const base64Credentials = Buffer.from(`${body.username}`).toString(
+      'base64',
+    );
 
     const requestBody = qs.stringify({
-      grant_type: 'client_credentials',
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET,
-      username: process.env.EMAIL_PERSONAL,
+      grant_type: body.grant_type,
+      client_id: body.client_id,
+      client_secret: body.client_secret,
+      username: body.username,
       password: base64Credentials,
     });
 
@@ -37,22 +38,15 @@ export class HttpAuthService {
       }),
     )
       .then((response) => {
-        return response.data;
+        return {
+          success: true,
+          ...response.data,
+        };
       })
       .catch((erro) => this.logger.error(erro));
 
-    this.logger.log(response);
+    this.logger.log(response.access_token);
 
     return response;
   }
-}
-
-interface PostData {
-  grant_type: string;
-  client_id: string;
-  client_secret: string;
-  username: string;
-  password: string;
-  email: string;
-  scope: string;
 }

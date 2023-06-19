@@ -4,6 +4,9 @@ import { CustumerModule } from '@modules/custumer.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from '@modules/auth.module';
 import { RedisModule } from '@modules/redis.module';
+import { HttpAuthModule } from './http-auth.module';
+import { APP_FILTER } from '@nestjs/core';
+import { RedisConnectionFilter } from '@application/filter/redis-connection.filter';
 
 @Module({
   imports: [
@@ -14,8 +17,14 @@ import { RedisModule } from '@modules/redis.module';
     CustumerModule,
     AuthModule,
     RedisModule,
+    HttpAuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: RedisConnectionFilter,
+    },
+  ],
 })
 export class AppModule {}
