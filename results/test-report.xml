@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/home/jandernery/Projects/Projeto Stone/stone-challenger/stone-backend/test/health-check/health-check.spec.ts">
+    <testCase name="AppController (unit) check should return &quot;OK&quot;" duration="19"/>
+  </file>
+</testExecutions>
