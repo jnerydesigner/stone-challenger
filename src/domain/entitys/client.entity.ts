@@ -1,5 +1,6 @@
+import { IAuthBody } from '@application/dto/auth-body.request';
 export interface IClient {
-  id: string | null;
+  id?: string;
   document: number;
   name: string;
 }
@@ -30,5 +31,17 @@ export class Client {
   }
   public get name() {
     return this.name;
+  }
+}
+
+export class ClientDomain {
+  private id: string;
+  private document: number;
+  private name: string;
+
+  constructor(client: IClient) {
+    this.id = client.id;
+    this.document = client.document;
+    this.name = client.name;
   }
 }
