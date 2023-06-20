@@ -64,7 +64,12 @@
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
 | `nenhum` | `vázio` | retorna todos os clientes inseridos |
+|**Descrição do método**|
+|Retorna todos os clients|
+| |
 
+
+#### Retorna apenas 1 item
 ```http
   GET /api/custumers/${id}
 ```
@@ -72,7 +77,11 @@
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
 | `id` | `string (uuid)` | retorna apenas um cliente inserido|
+|**Descrição do método**|
+|Retorna um client|
+| |
 
+#### Atualiza 1 item
 ```http
   PUT /api/custumers/${id}
 ```
@@ -82,7 +91,12 @@
 | `id` | `string (uuid)` | atualiza apenas um cliente|
 | `name` | `string`         | campo obrigatório|
 | `docuement` | `number` | campo obrigatório|
+|**Descrição do método**|
+|Atualiza o client e retorna o mesmo|
+| |
 
+
+#### Cria 1 item
 ```http
   POST /api/custumers
 ```
@@ -91,6 +105,9 @@
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string`         | campo obrigatório|
 | `docuement` | `number` | campo obrigatório|
+|**Descrição do método**|
+|Cria um client e retorna o mesmo|
+| |
 
 
 ## Rodando os testes
@@ -98,7 +115,7 @@
 Para rodar os testes, rode o seguinte comando
 
 ```bash
-  npm run test
+  yarn test
 ```
 
 
