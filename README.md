@@ -17,6 +17,10 @@
 ### Premissas e Restrições
 "Conforme Documento"
 
+- [Documento Desafio Stone](https://github.com/jnerydesigner/stone-challenger/blob/main/docs/NodeJS_Backend_(1)_(1).pdf)
+
+
+
 * NodeJS
 * NestJS
 * Axios
