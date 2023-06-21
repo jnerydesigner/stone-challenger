@@ -52,7 +52,7 @@
   yarn docker:up
 ```
 
-5 - Ibclua as variáveis conforme documento do desafio, e substitua criando um arquivo .env
+5 - Inclua as variáveis conforme documento do desafio, e substitua criando um arquivo .env
 
 .env.axample
 
