@@ -52,6 +52,19 @@
   yarn docker:up
 ```
 
+5 - Ibclua as variáveis conforme documento do desafio, e substitua criando um arquivo .env
+
+.env.axample
+
+```
+  EMAIL_PERSONAL=
+  GRANT_TYPE='client_credentials'
+  CLIENT_ID=customers
+  CLIENT_SECRET=
+  URL_AUTH=https://accounts.seguros.vitta.com.br
+  ENDPOINT_AUTH=auth/realms/careers/protocol/openid-connect/token
+```
+
 
 ## Documentação da API
 

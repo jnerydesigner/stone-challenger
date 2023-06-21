@@ -1,13 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/home/jander.nery/projects/stone-challenger/test/health-check/health-check.spec.ts">
-    <testCase name="AppController (unit) check should return &quot;OK&quot;" duration="9"/>
-  </file>
-  <file path="/home/jander.nery/projects/stone-challenger/test/custumer/custumer.spec.ts">
-    <testCase name="Custumer Controller (unit) custumer should return the client entity" duration="11"/>
-    <testCase name="Custumer Controller (unit) should be defined controller" duration="11"/>
-    <testCase name="Custumer Controller (unit) should be defined service" duration="4"/>
-    <testCase name="Custumer Controller (unit) should create client" duration="4"/>
-    <testCase name="Custumer Controller (unit) should update a client" duration="4"/>
-  </file>
 </testExecutions>
