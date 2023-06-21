@@ -54,7 +54,7 @@
 
 5 - Inclua as variáveis conforme documento do desafio, e substitua criando um arquivo .env
 
-.env.axample
+.env.example
 
 ```
   EMAIL_PERSONAL=
